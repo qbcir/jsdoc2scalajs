@@ -1,0 +1,18 @@
+package {{ package_name }}.{{ subpackage }}
+
+import scalajs.js
+
+{{#each classes }}
+@js.native
+@JSGlobal("{{ longname }}")
+class {{ name }} extends {{ augmentsToString augments }} {
+{{#each properties }}
+    {{{ propToString this }}}
+{{/each}}
+{{#each (lookup @root.methods_by_class longname)}}
+    {{ comment }}
+    def {{ name }}({{paramsToString params}}):{{ returnsToString returns }} = js.native
+{{/each}}
+}
+
+{{/each}}
